@@ -1,4 +1,13 @@
-import { Field, Input, VStack, Text, Progress } from "@chakra-ui/react";
+import {
+  Field,
+  Input,
+  VStack,
+  Text,
+  Progress,
+  Clipboard,
+  IconButton,
+  InputGroup,
+} from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { TOTP } from "totp-generator";
 
@@ -65,14 +74,14 @@ function App() {
 
   return (
     <VStack m="10" spacing="4" align="center">
-      <Input
-        size="lg"
-        w="150px"
-        variant="subtle"
-        readOnly={true}
-        value={totpCode}
-        placeholder="Código TOTP"
-      />
+      <Clipboard.Root w="150px" value={totpCode}>
+        <Clipboard.Label textStyle="label">Código TOTP</Clipboard.Label>
+        <InputGroup endElement={<ClipboardIconButton />}>
+          <Clipboard.Input asChild>
+            <Input />
+          </Clipboard.Input>
+        </InputGroup>
+      </Clipboard.Root>
 
       {totpCode && (
         <>
@@ -114,5 +123,15 @@ function App() {
     </VStack>
   );
 }
+
+const ClipboardIconButton = () => {
+  return (
+    <Clipboard.Trigger asChild>
+      <IconButton variant="surface" size="xs" me="-2">
+        <Clipboard.Indicator />
+      </IconButton>
+    </Clipboard.Trigger>
+  );
+};
 
 export default App;

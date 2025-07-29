@@ -7,12 +7,27 @@ import {
   Clipboard,
   IconButton,
   InputGroup,
+  Heading,
+  List,
+  Badge,
+  HStack,
+  Icon,
 } from "@chakra-ui/react";
+import { MdAccessTime } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { TOTP } from "totp-generator";
 
 function normalizeSecret(secret) {
   return secret.replace(/ /g, "").toUpperCase();
+}
+
+function formatTime(timestamp) {
+  const date = new Date(timestamp);
+  return date.toLocaleTimeString("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
 }
 
 function App() {
@@ -21,6 +36,7 @@ function App() {
   const [timeLeft, setTimeLeft] = useState(30);
   const [expiresAt, setExpiresAt] = useState(null);
   const [hasError, setHasError] = useState(false);
+  const [history, setHistory] = useState([]);
 
   useEffect(() => {
     const resetTOTP = () => {
@@ -28,6 +44,7 @@ function App() {
       setTimeLeft(30);
       setHasError(false);
       setExpiresAt(null);
+      setHistory([]);
     };
 
     if (!secret) {
@@ -63,6 +80,13 @@ function App() {
       }
 
       if (expiresAt < Date.now()) {
+        const startTime = expiresAt - 30 * 1000;
+        setHistory((prev) =>
+          [...prev, { code: totpCode, start: startTime, end: expiresAt }].slice(
+            -5
+          )
+        );
+
         generateTOTP();
         return;
       }
@@ -73,7 +97,15 @@ function App() {
   }, [secret, expiresAt, hasError]);
 
   return (
-    <VStack m="10" spacing="4" align="center">
+    <VStack
+      p="36"
+      spacing="4"
+      align="center"
+      bgGradient="to-br"
+      gradientFrom="white"
+      gradientTo="gray.200"
+      minH="100vh"
+    >
       <Clipboard.Root w="150px" value={totpCode}>
         <Clipboard.Label textStyle="label">Código TOTP</Clipboard.Label>
         <InputGroup endElement={<ClipboardIconButton />}>
@@ -115,11 +147,36 @@ function App() {
           placeholder="Digite aqui sua secret key"
           size="lg"
           value={secret}
-          onChange={(e) => setSecret(e.target.value)}
+          onChange={(e) => {
+            setSecret(e.target.value);
+            setHistory([]);
+          }}
           maxLength={32}
         />
         <Field.HelperText>Nunca compartilhe sua secret key.</Field.HelperText>
       </Field.Root>
+
+      <Heading size="lg">Últimos</Heading>
+
+      <List.Root variant="plain" gap={3}>
+        {history
+          .slice()
+          .reverse()
+          .map((item, index) => (
+            <List.Item key={index} gap={3}>
+              <Badge colorPalette="green" size="md">
+                {item.code}
+              </Badge>
+
+              <HStack gap={1}>
+                <Text fontSize="md" color="gray.600">
+                  {formatTime(item.start)} - {formatTime(item.end)}
+                </Text>
+                <Icon as={MdAccessTime} color="blue.500" boxSize={6} />
+              </HStack>
+            </List.Item>
+          ))}
+      </List.Root>
     </VStack>
   );
 }

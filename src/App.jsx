@@ -15,7 +15,7 @@ function App() {
       // bgGradient="to-br"
       // gradientFrom="white"
       // gradientTo="gray.200"
-      p={{ base: "4", md: "16" }}
+      p={{ base: "4", md: "8" }}
       minH="100vh"
       gap={{ base: "4", md: "8" }}
     >

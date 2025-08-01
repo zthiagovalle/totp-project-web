@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Separator } from "@chakra-ui/react";
 import TotpCodeList from "./TotpCodeList";
 import useTotpTimeline from "./useTotpTimeline";
 
@@ -11,13 +11,17 @@ export default function TotpCodeTimeline({ secretKey, totpCode }) {
   return (
     <Flex
       direction={{ base: "column", md: "row" }}
-      justify="space-around"
+      justify="center"
       w="100%"
       gap="6"
       bgColor="gray.100"
       borderRadius="md"
     >
       <TotpCodeList title="Latest" codes={latestCodes} colorPalette="orange" />
+      <Separator
+        orientation={{ base: "horizontal", md: "vertical" }}
+        size={{ base: "sm", md: "lg" }}
+      />
       <TotpCodeList
         title="Upcoming"
         codes={upcomingCodes}

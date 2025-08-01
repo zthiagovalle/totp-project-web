@@ -1,6 +1,6 @@
 import { TOTP } from "totp-generator";
 
-export default function generateTOTPCode(secretKey, timestamp = Date.now()) {
+export default function generateTotpCode(secretKey, timestamp = Date.now()) {
   let totpCode;
   try {
     totpCode = TOTP.generate(secretKey, { timestamp: timestamp });

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import generateTOTPCode from "./generateTOTPCode";
+import generateTotpCode from "./generateTotpCode";
 
-export default function useTOTPTimeline({ secretKey, totpCode }) {
+export default function useTotpTimeline({ secretKey, totpCode }) {
   const [upcomingCodes, setUpcomingCodes] = useState([]);
   const [latestCodes, setLatestCodes] = useState([]);
 
@@ -37,7 +37,7 @@ export default function useTOTPTimeline({ secretKey, totpCode }) {
       const pastTimeStart = new Date(lastCodeStart - i * 30000);
 
       try {
-        const { otp } = generateTOTPCode(secretKey, futureTimeStart);
+        const { otp } = generateTotpCode(secretKey, futureTimeStart);
         setUpcomingCodes((prevCodes) => [
           ...prevCodes,
           {
@@ -47,7 +47,7 @@ export default function useTOTPTimeline({ secretKey, totpCode }) {
           },
         ]);
 
-        const { otp: pastOtp } = generateTOTPCode(secretKey, pastTimeStart);
+        const { otp: pastOtp } = generateTotpCode(secretKey, pastTimeStart);
         setLatestCodes((prevCodes) => [
           ...prevCodes,
           {

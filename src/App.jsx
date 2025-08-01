@@ -2,6 +2,7 @@ import { VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import TotpCodeGenerator from "./TotpCodeGenerator";
 import TotpCodeTimeline from "./TotpCodeTimeline";
+import TotpHistoryChecker from "./TotpHistoryChecker";
 
 function App() {
   const [secretKey, setSecretKey] = useState("");
@@ -24,6 +25,7 @@ function App() {
         setTotpCode={setTotpCode}
       />
       <TotpCodeTimeline secretKey={secretKey} totpCode={totpCode} />
+      <TotpHistoryChecker />
     </VStack>
   );
 }

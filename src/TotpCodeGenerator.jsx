@@ -11,14 +11,14 @@ import {
 } from "@chakra-ui/react";
 import { useDebounce } from "use-debounce";
 import { useState, useEffect } from "react";
-import useTOTP from "./useTOTP";
+import useTotp from "./useTotp";
 
 export default function TotpCodeGenerator({
   secretKey,
   setSecretKey,
   setTotpCode,
 }) {
-  const { totpCode, timeLeft, hasInvalidSecretKey } = useTOTP(secretKey);
+  const { totpCode, timeLeft, hasInvalidSecretKey } = useTotp(secretKey);
   const [inputValue, setInputValue] = useState(secretKey);
   const debouncedValue = useDebounce(inputValue, 300)[0];
 

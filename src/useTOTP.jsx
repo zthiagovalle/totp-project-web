@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
-import generateTOTPCode from "./generateTOTPCode";
+import generateTotpCode from "./generateTotpCode";
 
-export default function useTOTP(secretKey) {
+export default function useTotp(secretKey) {
   const [totpCode, setTotpCode] = useState("");
   const [timeLeft, setTimeLeft] = useState(30);
   const [hasInvalidSecretKey, setHasInvalidSecretKey] = useState(false);
@@ -10,7 +10,7 @@ export default function useTOTP(secretKey) {
     if (!secretKey) return;
 
     try {
-      const { otp, expires } = generateTOTPCode(secretKey);
+      const { otp, expires } = generateTotpCode(secretKey);
       setTotpCode(otp);
       setHasInvalidSecretKey(false);
 

@@ -16,8 +16,7 @@ export default function useTotp(secretKey) {
 
       const initialTimeLeft = Math.ceil((expires - Date.now()) / 1000);
       setTimeLeft(initialTimeLeft > 0 ? initialTimeLeft : 30);
-    } catch (error) {
-      console.error("Error generating TOTP code:", error);
+    } catch {
       setTotpCode("");
       setTimeLeft(0);
       setHasInvalidSecretKey(true);

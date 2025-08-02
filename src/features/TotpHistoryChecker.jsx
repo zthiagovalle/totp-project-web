@@ -34,8 +34,7 @@ export default function TotpHistoryChecker() {
     try {
       const result = checkIfTotpExisted(secretKey, totpCode, selectedPeriod);
       setResult(result);
-    } catch (error) {
-      console.error("Error checking TOTP history:", error);
+    } catch {
       setHasInvalidSecretKey(true);
       return;
     } finally {

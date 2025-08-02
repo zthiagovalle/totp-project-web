@@ -1,12 +1,33 @@
-# React + Vite
+# TOTP Tools
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web-based TOTP (Time-based One-Time Password) utility built with React and Vite. This tool lets you generate TOTP codes, view upcoming and previous codes, and check if a code existed within a given period. It’s designed for developers who need to work with TOTP for authentication, testing, or auditing.
 
-Currently, two official plugins are available:
+## Notable Libraries and Technologies
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [React](https://react.dev/) for UI development.
+- [Vite](https://vitejs.dev/) for fast development and build tooling.
+- [Chakra UI](https://chakra-ui.com/) for accessible, themeable UI components.
+- [totp-generator](https://www.npmjs.com/package/totp-generator) for TOTP code generation.
+- [use-debounce](https://www.npmjs.com/package/use-debounce) for debounced state updates.
+- [react-icons](https://react-icons.github.io/react-icons/) for iconography.
+- [vite-plugin-node-polyfills](https://www.npmjs.com/package/vite-plugin-node-polyfills) for Node.js polyfills in the browser.
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+.gitignore
+.prettierrc
+eslint.config.js
+index.html
+package.json
+README.md
+vite.config.js
+public/
+src/
+  features/
+  hooks/
+```
+
+- **public/**: Static assets, including SVG icons.
+- **src/features/**: Core React components and logic for TOTP generation, timeline, and history checking.
+- **src/hooks/**: Custom React hooks for TOTP code and

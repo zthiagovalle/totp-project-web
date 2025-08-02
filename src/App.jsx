@@ -94,7 +94,7 @@ function App() {
           </Link>
           {". Source on "}
           <Link
-            href="https://github.com/seu-repo"
+            href="https://github.com/zthiagovalle/totp-project-web"
             target="_blank"
             color="blue.500"
           >

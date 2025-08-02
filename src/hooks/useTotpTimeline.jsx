@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import generateTotpCode from "./generateTotpCode";
+import generateTotpCode from "../features/generateTotpCode";
 
 export default function useTotpTimeline({ secretKey, totpCode }) {
   const [upcomingCodes, setUpcomingCodes] = useState([]);

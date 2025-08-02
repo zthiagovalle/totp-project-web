@@ -1,9 +1,9 @@
 import { VStack, Tabs, Heading, Icon, Box, Link, Text } from "@chakra-ui/react";
 import { LuClock, LuHistory } from "react-icons/lu";
 import { useState } from "react";
-import TotpCodeGenerator from "./TotpCodeGenerator";
-import TotpCodeTimeline from "./TotpCodeTimeline";
-import TotpHistoryChecker from "./TotpHistoryChecker";
+import TotpCodeGenerator from "./features/TotpCodeGenerator";
+import TotpCodeTimeline from "./features/TotpCodeTimeline";
+import TotpHistoryChecker from "./features/TotpHistoryChecker";
 
 function App() {
   const [secretKey, setSecretKey] = useState("");

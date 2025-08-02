@@ -7,11 +7,10 @@ import {
   IconButton,
   InputGroup,
   VStack,
-  Heading,
 } from "@chakra-ui/react";
 import { useDebounce } from "use-debounce";
 import { useState, useEffect } from "react";
-import useTotp from "./useTotp";
+import useTotp from "../hooks/useTotp";
 
 export default function TotpCodeGenerator({
   secretKey,

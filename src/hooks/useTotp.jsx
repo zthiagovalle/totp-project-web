@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import generateTotpCode from "./generateTotpCode";
+import generateTotpCode from "../features/generateTotpCode";
 
 export default function useTotp(secretKey) {
   const [totpCode, setTotpCode] = useState("");

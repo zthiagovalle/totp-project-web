@@ -1,14 +1,11 @@
 import {
   Alert,
   Button,
-  Flex,
   Field,
   Input,
   Select,
   createListCollection,
   VStack,
-  Card,
-  Heading,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import checkIfTotpExisted from "./checkIfTotpExisted";

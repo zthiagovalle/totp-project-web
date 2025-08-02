@@ -1,6 +1,6 @@
 import { Flex, Separator } from "@chakra-ui/react";
 import TotpCodeList from "./TotpCodeList";
-import useTotpTimeline from "./useTotpTimeline";
+import useTotpTimeline from "../hooks/useTotpTimeline";
 
 export default function TotpCodeTimeline({ secretKey, totpCode }) {
   const { upcomingCodes, latestCodes } = useTotpTimeline({

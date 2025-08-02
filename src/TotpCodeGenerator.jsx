@@ -33,15 +33,7 @@ export default function TotpCodeGenerator({
   }, [totpCode, setTotpCode]);
 
   return (
-    <VStack
-      w="100%"
-      align="center"
-      gap="4"
-      bgColor="gray.100"
-      borderRadius="md"
-    >
-      <Heading size="lg">TOTP Code Generator</Heading>
-
+    <VStack w="100%" gap="2">
       <Clipboard.Root maxW="150px" value={totpCode}>
         <Clipboard.Label textStyle="label">TOTP Code</Clipboard.Label>
         <InputGroup endElement={<ClipboardIconButton />}>
@@ -51,26 +43,22 @@ export default function TotpCodeGenerator({
         </InputGroup>
       </Clipboard.Root>
 
-      {totpCode && (
-        <>
-          <Text fontSize="sm" color="gray.500">
-            New code in: {timeLeft}s
-          </Text>
-          <Progress.Root
-            value={(timeLeft / 30) * 100}
-            max={100}
-            size="md"
-            minW="150px"
-            colorPalette={timeLeft < 10 ? "red" : "blue"}
-            striped
-            animated
-          >
-            <Progress.Track>
-              <Progress.Range />
-            </Progress.Track>
-          </Progress.Root>
-        </>
-      )}
+      <Text fontSize="sm" color="gray.500">
+        New code in: {timeLeft}s
+      </Text>
+      <Progress.Root
+        value={(timeLeft / 30) * 100}
+        max={100}
+        size="md"
+        minW="150px"
+        colorPalette={timeLeft < 10 ? "red" : "blue"}
+        striped
+        animated
+      >
+        <Progress.Track>
+          <Progress.Range />
+        </Progress.Track>
+      </Progress.Root>
 
       <Field.Root maxW="md" invalid={hasInvalidSecretKey}>
         <Field.Label>Secret Key</Field.Label>

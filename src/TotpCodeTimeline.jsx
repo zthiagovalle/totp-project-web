@@ -14,8 +14,6 @@ export default function TotpCodeTimeline({ secretKey, totpCode }) {
       justify="center"
       w="100%"
       gap="6"
-      bgColor="gray.100"
-      borderRadius="md"
     >
       <TotpCodeList title="Latest" codes={latestCodes} colorPalette="orange" />
       <Separator

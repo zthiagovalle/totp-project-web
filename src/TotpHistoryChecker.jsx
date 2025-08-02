@@ -1,12 +1,12 @@
 import {
+  Alert,
   Button,
   Flex,
   Field,
   Input,
   Select,
   createListCollection,
-  Stack,
-  Box,
+  VStack,
   Card,
   Heading,
 } from "@chakra-ui/react";
@@ -47,19 +47,12 @@ export default function TotpHistoryChecker() {
   };
 
   return (
-    <Flex
-      w="100%"
-      bgColor="gray.100"
-      borderRadius="md"
-      direction={{ base: "column", md: "row" }}
-      align="center"
-      justify="center"
-      gap={{ base: "4", md: "10" }}
-    >
-      <form w="100%" onSubmit={handleSubmit}>
-        <Flex bgColor="gray.100" gap="6" direction={"column"} w="100%">
+    <VStack gap="4" w="100%">
+      <form onSubmit={handleSubmit}>
+        <VStack gap="4" w="100%">
           <Field.Root
-            maxW="sm"
+            w={{ base: "200px", md: "md" }}
+            maxW="md"
             required={true}
             invalid={hasInvalidSecretKey}
             disabled={isInProgress}
@@ -76,7 +69,12 @@ export default function TotpHistoryChecker() {
             <Field.ErrorText>Invalid Secret Key</Field.ErrorText>
           </Field.Root>
 
-          <Field.Root maxW="200px" required={true} disabled={isInProgress}>
+          <Field.Root
+            maxW="md"
+            w={{ base: "200px", md: "md" }}
+            required={true}
+            disabled={isInProgress}
+          >
             <Field.Label>TOTP Code</Field.Label>
             <Input
               name="totpCode"
@@ -88,7 +86,12 @@ export default function TotpHistoryChecker() {
             />
           </Field.Root>
 
-          <Field.Root maxW="100px" required={true} disabled={isInProgress}>
+          <Field.Root
+            maxW="md"
+            required={true}
+            disabled={isInProgress}
+            w={{ base: "200px", md: "md" }}
+          >
             <Field.Label>Period (Days)</Field.Label>
             <Select.Root
               defaultValue={[1]}
@@ -124,27 +127,44 @@ export default function TotpHistoryChecker() {
           <Button
             type="submit"
             colorPalette="blue"
-            variant="subtle"
             loading={isInProgress}
-            size="xl"
-            w="sm"
+            size="lg"
+            maxW="md"
+            w={{ base: "200px", md: "md" }}
           >
             Check
           </Button>
-        </Flex>
+        </VStack>
       </form>
 
-      <Card.Root>
-        <Card.Header>
-          <Heading size="md">Result</Heading>
-        </Card.Header>
-        <Card.Body>
-          Found on {result?.date ? result.date : "DD/MM/YYYY"} <br />
-          valid from {result?.timeStart
-            ? result?.timeStart
-            : "HH:MM:SS"} to {result?.timeEnd ? result?.timeEnd : "HH:MM:SS"}
-        </Card.Body>
-      </Card.Root>
-    </Flex>
+      <Alert.Root
+        status={result ? (result?.found ? "success" : "error") : "info"}
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        textAlign="center"
+        height="auto"
+        maxW="md"
+      >
+        <Alert.Indicator boxSize="40px" mb="2" />
+        <Alert.Title mb="1" fontSize="lg">
+          Result
+        </Alert.Title>
+        <Alert.Description maxWidth="sm">
+          {result ? (
+            result.found ? (
+              <>
+                Found on {result.date} <br />
+                valid from {result.timeStart} to {result.timeEnd}
+              </>
+            ) : (
+              "Not found in the period."
+            )
+          ) : (
+            "Submit to check."
+          )}
+        </Alert.Description>
+      </Alert.Root>
+    </VStack>
   );
 }

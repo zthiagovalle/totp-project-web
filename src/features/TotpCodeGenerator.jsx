@@ -35,9 +35,22 @@ export default function TotpCodeGenerator({
     <VStack w="100%" gap="2">
       <Clipboard.Root maxW="150px" value={totpCode}>
         <Clipboard.Label textStyle="label">TOTP Code</Clipboard.Label>
-        <InputGroup endElement={<ClipboardIconButton />}>
-          <Clipboard.Input asChild>
-            <Input />
+        <InputGroup
+          endElement={
+            <Clipboard.Trigger asChild>
+              <IconButton
+                variant="surface"
+                size="xs"
+                me="-2"
+                disabled={!totpCode}
+              >
+                <Clipboard.Indicator />
+              </IconButton>
+            </Clipboard.Trigger>
+          }
+        >
+          <Clipboard.Input asChild disabled={!totpCode}>
+            <Input disabled={!totpCode} />
           </Clipboard.Input>
         </InputGroup>
       </Clipboard.Root>
@@ -76,13 +89,3 @@ export default function TotpCodeGenerator({
     </VStack>
   );
 }
-
-const ClipboardIconButton = () => {
-  return (
-    <Clipboard.Trigger asChild>
-      <IconButton variant="surface" size="xs" me="-2">
-        <Clipboard.Indicator />
-      </IconButton>
-    </Clipboard.Trigger>
-  );
-};

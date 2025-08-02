@@ -42,6 +42,11 @@ export default function TotpHistoryChecker() {
     }
   };
 
+  const handleTotpCodeInput = (e) => {
+    const totpCodeValue = e.target.value.replace(/\D+/, "");
+    setTotpCode(totpCodeValue);
+  };
+
   return (
     <VStack gap="4" w="100%">
       <form onSubmit={handleSubmit}>
@@ -78,7 +83,7 @@ export default function TotpHistoryChecker() {
               size="lg"
               maxLength={6}
               value={totpCode}
-              onChange={(e) => setTotpCode(e.target.value)}
+              onChange={handleTotpCodeInput}
             />
           </Field.Root>
 
